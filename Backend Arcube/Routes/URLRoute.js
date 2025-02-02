@@ -14,17 +14,13 @@ router.post("/shorten", async (req, res) => {
 
     if (!url) {
       const shortId = shortid.generate();
-      console.log(shortId)
       url = new Url({ longUrl, shortId });
-      console.log(url)
-      await url.save();
-      console.log("Hello")
-
+       await url.save();
+ 
     }
 
 
     res.json({ shortUrl: `${process.env.BASE_URL}/${url.shortId}` });  } catch (err) {
-    console.error("Database Save Error:", err);
     res.status(500).json({ error: "Server error" });
   }
   
